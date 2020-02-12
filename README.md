@@ -9,3 +9,18 @@ You will learn about event-carried state transfer and idempotency. Challenges wh
 ## workshop requirements
 Please checkout this repository and make sure you can successfully run `sbt compile` on it.
 Very basic Scala knowhow is sufficient to attend this workshop. I will start with the basics for all assignements. For the faster or more experienced attendees, I have additional assignements, like building a "distributed" consensus algorithm using a centralized database and implementing an assignement with "given/using" in Dotty (Scala 3), instead of implicits from Scala 2.
+
+## assignements
+### structures and composition
+#### Case Classes
+#### Option
+#### Either
+#### For-comprehensions
+#### sequence - List[Either] to Either[List]
+### advanced (instead/after structures)
+#### Building a "distributed" consensus algorithm using a centralized database
+### implicits
+#### build your own abstraction on Play-Json
+### advanced (instead/after implicits)
+#### update your Scala 2.0 solution to Dotty/Scala 3.0
+#### send and Receive messages over RabbitMQ
