@@ -1,5 +1,7 @@
 package ch.unic.eitherandfriends.solutions._1
 
+import ch.unic.eitherandfriends.Utils.printTitle
+
 /**
  * Create two "case classes"
  *  - Employee
@@ -22,29 +24,58 @@ package ch.unic.eitherandfriends.solutions._1
  *   - match / case
  *   - if / else
  *
- * Rather use
- *   - map
+ * Rather use a for-comprehension
+ *
+ * Also try to build your own de-sugared version of the for-comprehension using
  *   - flatMap
+ *   - map
+ *
+ * Then try to build a more descriptive output like s"$boss of $employee went to $university"
  */
 
 final case class Employee(name: String, diploma: Option[Diploma], boss: Option[Employee])
 final case class Diploma(university: String, year: Int)
 
 object OptionAssignment extends App {
-  val jake = Employee("Jake", Some(Diploma("Boston", 1995)), None)
+  val linda = Employee("Linda", Some(Diploma("MIT", 1995)), None)
+  val jake = Employee("Jake", Some(Diploma("Boston", 1995)), Some(linda))
   val trudy = Employee("Trudy", Some(Diploma("Princeton", 1998)), Some(jake))
   val john = Employee("John", None, Some(jake))
   val james = Employee("James", None, Some(john))
 
-  val employees: List[Employee] = jake :: trudy :: john :: james :: Nil
+  val employees: List[Employee] = jake :: trudy :: john :: james :: linda :: Nil
+
 
   def universityOfBoss(employee: Employee) =
+    for {
+      boss <- employee.boss
+      diploma <- boss.diploma
+    } yield diploma.university
+
+  def universityOfBossDesugared(employee: Employee) =
     employee.boss
       .flatMap(_.diploma)
       .map(_.university)
-      .getOrElse("No University")
 
+  def universityOfBossDescriptive(employee: Employee) =
+    for {
+      boss <- employee.boss
+      diploma <- boss.diploma
+      university = diploma.university
+    } yield s"${boss.name} the boss of ${employee.name} went to $university"
+
+  printTitle("universityOfBoss")
   employees
-    .map(e => universityOfBoss(e))
+    .flatMap(e => universityOfBoss(e))
+    .foreach(println)
+
+  printTitle("universityOfBossDesugared")
+  employees
+    .flatMap(e => universityOfBossDesugared(e))
+    .foreach(println)
+
+  printTitle("universityOfBossDescriptive")
+  employees
+    .flatMap(e => universityOfBossDescriptive(e))
     .foreach(println)
 }

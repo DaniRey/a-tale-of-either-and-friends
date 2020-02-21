@@ -12,7 +12,6 @@ Very basic Scala knowhow is sufficient to attend this workshop. I will start wit
 
 ## assignements
 ### structures and composition
-#### Case Classes
 #### Option
 #### Either
 #### For-comprehensions

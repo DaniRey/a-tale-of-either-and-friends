@@ -1,5 +1,7 @@
 package ch.unic.eitherandfriends.assignments._1
 
+import ch.unic.eitherandfriends.Utils.printTitle
+
 /**
  * Create two "case classes"
  *  - Employee
@@ -22,9 +24,13 @@ package ch.unic.eitherandfriends.assignments._1
  *   - match / case
  *   - if / else
  *
- * Rather use
- *   - map
+ * Rather use a for-comprehension
+ *
+ * Also try to build your own de-sugared version of the for-comprehension using
  *   - flatMap
+ *   - map
+ *
+ * Then try to build a more descriptive output like s"$boss of $employee went to $university"
  */
 
 final case class Employee()
@@ -35,6 +41,7 @@ object OptionAssignment extends App {
 
   def universityOfBoss(employee: Employee) = ???
 
+  printTitle("universityOfBoss")
   employees
     .map(e => universityOfBoss(e))
     .foreach(println)
