@@ -1,3 +1,5 @@
+import scala.util.{Failure, Success, Try}
+
 /**
  * Many of these examples where taken straight from the famous talk: "For: What is it good for?"
  * by Josh Suereth & Dick Wall
@@ -29,3 +31,30 @@ for {
   y <- e4
 } yield x * y
 
+//When reading/parsing data Either is very useful
+type Name = String
+type Age = Int
+case class Person(name: String, age: Int)
+
+def parseName(s: String): Either[ParseError, Name] =
+  if (s.isEmpty)
+    Left(s"'$s' is not a valid Name")
+  else
+    Right(s)
+
+def parseAge(s: String): Either[ParseError, Age] =
+  Try(s.toInt) match {
+    case Failure(_) => Left(s"'$s' is not a valid Age")
+    case Success(age) => Right(age)
+  }
+
+def parsePerson(inputName: String, inputAge: String): Either[ParseError, Person] = {
+  for {
+    name <- parseName(inputName)
+    age <- parseAge(inputAge)
+  } yield Person(name, age)
+}
+
+parsePerson("Sally", "25")
+parsePerson("", "25")
+parsePerson("Sally", "twenty eight")
