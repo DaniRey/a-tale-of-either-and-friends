@@ -1,8 +1,8 @@
-ThisBuild / organization := "ch.unic.eitherandfriends"
+ThisBuild / organization := "either.and.friends"
 ThisBuild / scalaVersion := "2.13.1"
 ThisBuild / version      := "0.0.1-SNAPSHOT"
 
-lazy val root = (project in file("."))
+lazy val eitherandfriends = (project in file("."))
   .aggregate(forcomprehensions, consensus)
 
 lazy val forcomprehensions = (project in file("forcomprehensions"))

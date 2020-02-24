@@ -1,4 +1,4 @@
-package ch.unic.eitherandfriends
+package either.and.friends
 
 object Utils {
   def printTitle(title: String): Unit = {

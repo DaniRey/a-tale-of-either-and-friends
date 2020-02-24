@@ -1,6 +1,6 @@
-package ch.unic.eitherandfriends.solutions._1
+package either.and.friends.solutions._1
 
-import ch.unic.eitherandfriends.Utils.printTitle
+import either.and.friends.Utils.printTitle
 
 /**
  * Create two "case classes"
