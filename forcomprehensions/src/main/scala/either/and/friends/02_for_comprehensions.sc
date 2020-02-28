@@ -7,15 +7,17 @@
  * Highly recommend to watch it!
  */
 
-//Your fors jedi apprenticeship
+//Your fors jedi apprenticeship - step 1
 //Fors are about loops
 for (i <- 1 to 10) println("hello world")
 
 for (i <- 1 to 10) println(i * i)
 
 
+//Your fors jedi apprenticeship - step 2
+
 //Fors can make collections or options
-val squares = for (i <- 1 to 10) yield (i * i)
+val squares = for (i <- 1 to 10) yield i * i
 
 case class TimesResult(i: Int, j: Int, mult: Int)
 
@@ -25,19 +27,21 @@ val timesTable = for {
   j <- 1 to 5
 } yield TimesResult(i, j, i * j)
 
+//the generators are connected by flatMap and map
 for {
   i <- 1 to 3 //flatMap
   j <- 1 to 3 //flatMap
   k <- 1 to 3 //map
 } yield i * j * k
 
-//working with Options
+//This works neatly for building something form multiple options
 val oResult = for {
   i <- Some(1)
   j <- Some(2)
   k <- Some(5)
 } yield i * j * k
 
+//if one Option is None, the for-comprehension yields None
 def intNone: Option[Int] = None
 val oNoResult = for {
   i <- Some(1)
