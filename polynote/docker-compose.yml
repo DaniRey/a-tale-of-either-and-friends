@@ -1,14 +1,1 @@
-version: "3.4"
-services:
-  polynote:
-    image: polynote/polynote:latest
-    environment:
-      - PYSPARK_ALLOW_INSECURE_GATEWAY=1
-    volumes: 
-      - ./config:/opt/config
-      - ./notebooks:/opt/notebooks
-    ports:
-      - "8192:8192"
-      - "4040-4050:4040-4050"
-    entrypoint: ['./polynote/polynote.py', "--config", "/opt/config/config.yml"]
-
+version: "3.4"services:  polynote:    image: polynote/polynote:0.3.2-2.12    environment:      - PYSPARK_ALLOW_INSECURE_GATEWAY=1    volumes:       - ./config:/opt/config      - ./notebooks:/opt/notebooks    ports:      - "8192:8192"      - "4040-4050:4040-4050"    entrypoint: ['./polynote/polynote.py', "--config", "/opt/config/config.yml"]

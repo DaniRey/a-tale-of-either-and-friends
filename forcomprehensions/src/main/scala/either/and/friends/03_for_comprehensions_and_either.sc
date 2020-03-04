@@ -8,6 +8,19 @@ import scala.util.{Failure, Success, Try}
  *
  * Highly recommend to watch it!
  */
+
+/**
+ * abstract sealed class Either[+A, +B]
+ * extends Product
+ * with scala.Serializable
+ *
+ * Either represents a value of one of two possible types (a disjoint union). An instance of Either is an instance of either scala.util.Left or scala.util.Right.
+ *
+ * A common use of Either is as an alternative to scala.Option for dealing with possibly missing values. In this usage, scala.None is replaced with a scala.util.Left which can contain useful information. scala.util.Right takes the place of scala.Some.
+ *
+ * Convention dictates that Left is used for failure and Right is used for success. For example, you could use Either[String, Int] to indicate whether a received input is a String or an Int.
+ */
+
 type ParseError = String
 val e1: Either[ParseError, Int] = Right(1)
 val e2: Either[ParseError, Int] = Right(5)
@@ -31,10 +44,55 @@ for {
   y <- e4
 } yield x * y
 
-//When reading/parsing data Either is very useful
+//Why does this work?
+
+for {
+  x <- e1.right //flatMap
+  y <- e2.right //map
+} yield x * y
+
+//Is the same as
+
+e1.flatMap(
+  x => e2.map(
+    y => x * y)
+)
+
+e3.flatMap(
+  x => e4.map(
+    y => x * y)
+)
+
+/**
+ * abstract sealed class Either[+A, +B]
+ *
+ * /** Binds the given function across `Right`.
+ * *
+ * *  @param f The function to bind across `Right`.
+ **/
+ * def flatMap[A1 >: A, B1](f: B => Either[A1, B1]): Either[A1, B1] = this match {
+ * case Right(b) => f(b)
+ * case _        => this.asInstanceOf[Either[A1, B1]]
+ * }
+ *
+ * /** The given function is applied if this is a `Right`.
+ * *
+ * *  {{{
+ *  *  Right(12).map(x => "flower") // Result: Right("flower")
+ *  *  Left(12).map(x => "flower")  // Result: Left(12)
+ *  *  }}}
+ **/
+ * def map[B1](f: B => B1): Either[A, B1] = this match {
+ * case Right(b) => Right(f(b))
+ * case _        => this.asInstanceOf[Either[A, B1]]
+ * }
+ */
+
+//Either is very useful, when reading/parsing data
 type Name = String
 type Age = Int
-case class Person(name: String, age: Int)
+
+case class Person(name: Name, age: Int)
 
 def parseName(s: String): Either[ParseError, Name] =
   if (s.isEmpty)
