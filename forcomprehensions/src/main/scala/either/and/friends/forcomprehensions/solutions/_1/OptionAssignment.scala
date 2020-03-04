@@ -1,6 +1,6 @@
-package either.and.friends.solutions._1
+package either.and.friends.forcomprehensions.solutions._1
 
-import either.and.friends.Utils.printTitle
+import either.and.friends.forcomprehensions.Utils.printTitle
 
 /**
  * Create two "case classes"

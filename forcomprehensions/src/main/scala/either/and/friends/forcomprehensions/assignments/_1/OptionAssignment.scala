@@ -1,6 +1,6 @@
-package ch.unic.eitherandfriends.assignments._1
+package either.and.friends.forcomprehensions.assignments._1
 
-import either.and.friends.Utils.printTitle
+import either.and.friends.forcomprehensions.Utils.printTitle
 
 /**
  * Create two "case classes"

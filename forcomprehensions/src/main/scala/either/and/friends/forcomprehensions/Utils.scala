@@ -1,4 +1,4 @@
-package either.and.friends
+package either.and.friends.forcomprehensions
 
 object Utils {
   def printTitle(title: String): Unit = {
